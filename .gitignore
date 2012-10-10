@@ -1,0 +1,14 @@
+# Python
+build
+dist
+*\.egg-info
+*\.pyc
+
+# Tox
+\.tox
+__pycache__
+
+# virtstrap
+\.vs.env
+quickactivate
+VEfile.lock
