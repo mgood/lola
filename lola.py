@@ -25,13 +25,13 @@ class Runner(object):
                   stderr=subprocess.STDOUT,
                   env=env)
 
-    """
+  """
   def __init__(self, python=None):
     if python is None:
       python = sys.executable
 
     self._listener = listener = Listener()
-    subprocess.Popen([python, __file__, listener.address])
+    subprocess.Popen([python, '-', listener.address], stdin=open(__file__))
     self._cnx = listener.accept()
 
   def close(self):
