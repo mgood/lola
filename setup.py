@@ -10,7 +10,7 @@ setuptools.setup(
   long_description = open('README.txt').read(),
   author = 'Matt Good',
   author_email = 'matt@matt-good.net',
-  url = 'http://mgood.github.com/lola/',
+  url = 'http://github.com/mgood/lola/',
   platforms = 'any',
 
   py_modules = ['lola'],
