@@ -31,7 +31,10 @@ class Runner(object):
       python = sys.executable
 
     self._listener = listener = Listener()
-    subprocess.Popen([python, '-', listener.address], stdin=open(__file__))
+    filename = __file__
+    if filename.endswith(('.pyc', '.pyo')):
+      filename = filename[:-1]
+    subprocess.Popen([python, '-', listener.address], stdin=open(filename))
     self._cnx = listener.accept()
 
   def close(self):
