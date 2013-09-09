@@ -200,25 +200,31 @@ class _PyPopen(subprocess.Popen):
         p_globals['__file__'] = os.path.abspath(executable)
         execfile(executable, p_globals)
       except SystemExit as e:
-        sys.stdout.flush()
         if isinstance(e.code, int):
-          os._exit(e.code)
+          _do_exit(e.code)
         elif e.code is None:
-          os._exit(0)
+          _do_exit(0)
         else:
+          sys.stdout.flush()
           print >>sys.stderr, e.code
-          os._exit(1)
+          _do_exit(1)
       except:
         sys.stdout.flush()
         traceback.print_exc()
-        os._exit(255)
+        _do_exit(255)
       else:
-        sys.stdout.flush()
-        os._exit(0)
+        _do_exit(0)
 
     subprocess.Popen.__init__(self, args, bufsize, executable, stdin, stdout,
                               stderr, exec_python, close_fds, shell, cwd, env,
                               universal_newlines, startupinfo, creationflags)
+
+
+def _do_exit(code):
+  if hasattr(sys, 'exitfunc'):
+    sys.exitfunc()
+  sys.stdout.flush()
+  os._exit(code)
 
 
 if __name__ == '__main__':
