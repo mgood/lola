@@ -4,7 +4,7 @@ import setuptools
 
 setuptools.setup(
   name = 'lola',
-  version = '0.1.2',
+  version = '0.1.3',
   license = 'BSD',
   description = 'Lola runs small Python scripts quickly',
   long_description = open('README.txt').read(),
